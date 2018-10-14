@@ -25,4 +25,6 @@ interface Books_Service {
     @DELETE("clean")
     fun deleteAllBooks(): Call<Unit>
 
+
+
 }
