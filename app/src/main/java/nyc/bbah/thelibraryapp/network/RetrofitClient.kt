@@ -6,9 +6,9 @@ import retrofit2.Retrofit
 import retrofit2.converter.gson.GsonConverterFactory
 import java.util.concurrent.TimeUnit
 
-object Retrofit_Client {
+object RetrofitClient {
 
-    var retrofit: Retrofit? = null
+    private var retrofit: Retrofit? = null
 
     fun getClient(baseUrl: String): Retrofit? {
         if (retrofit == null) {

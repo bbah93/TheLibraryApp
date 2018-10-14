@@ -25,6 +25,13 @@ interface Books_Service {
     @DELETE("clean")
     fun deleteAllBooks(): Call<Unit>
 
+    object ApiUtils {
 
+        private const val BASE_URL = "http://prolific-interview.herokuapp.com/5bbe13b79f6d520009971394/"
+
+        val books_Service: Books_Service
+            get() = RetrofitClient.getClient(BASE_URL)!!.create(Books_Service::class.java)
+
+    }
 
 }
