@@ -25,7 +25,7 @@ interface Books_Service {
     @DELETE("clean")
     fun deleteAllBooks(): Call<Unit>
 
-    object ApiUtils {
+    companion object ApiUtils {
 
         private const val BASE_URL = "http://prolific-interview.herokuapp.com/5bbe13b79f6d520009971394/"
 
