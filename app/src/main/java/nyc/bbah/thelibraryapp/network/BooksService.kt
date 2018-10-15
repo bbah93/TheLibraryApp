@@ -4,7 +4,7 @@ import nyc.bbah.thelibraryapp.model.Book
 import retrofit2.Call
 import retrofit2.http.*
 
-interface Books_Service {
+interface BooksService {
 
     @GET("books")
     fun getBooks(): Call<List<Book>>
@@ -29,8 +29,8 @@ interface Books_Service {
 
         private const val BASE_URL = "http://prolific-interview.herokuapp.com/5bbe13b79f6d520009971394/"
 
-        val books_Service: Books_Service
-            get() = RetrofitClient.getClient(BASE_URL)!!.create(Books_Service::class.java)
+        val books_Service: BooksService
+            get() = RetrofitClient.getClient(BASE_URL)!!.create(BooksService::class.java)
     }
 
 }
