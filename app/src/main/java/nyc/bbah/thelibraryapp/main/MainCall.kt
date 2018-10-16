@@ -8,13 +8,12 @@ import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
 
-class MainCall : Main_Contract.Network{
+class MainCall : MainContract.Network{
     //make network call to get List of Books. super from contract
     override fun apiCall(onSuccess: (List<Book>) -> Unit): Call<List<Book>> {
         val bookService = BooksService.ApiUtils.books_Service
         val call = bookService.getBooks()
 
-        //bookList = bookService.getBooks().execute().body()
         bookService.getBooks().enqueue(object : Callback<List<Book>> {
             override fun onResponse(call: Call<List<Book>>, response: Response<List<Book>>) {
                 val data = response.body()

@@ -1,12 +1,16 @@
 package nyc.bbah.thelibraryapp.RecyclerView
 
+
+import android.support.v4.app.FragmentManager
+import android.support.v4.app.FragmentTransaction
 import android.support.v7.widget.RecyclerView
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import nyc.bbah.thelibraryapp.R.*
+import nyc.bbah.thelibraryapp.main.MainContract
 import nyc.bbah.thelibraryapp.model.Book
 
-class BooksAdapter(private val items: List<Book>?) : RecyclerView.Adapter<BooksViewHolder>() {
+class BooksAdapter(val items: List<Book>?) : RecyclerView.Adapter<BooksViewHolder>() {
 
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): BooksViewHolder {
@@ -15,9 +19,11 @@ class BooksAdapter(private val items: List<Book>?) : RecyclerView.Adapter<BooksV
 
     override fun onBindViewHolder(holder: BooksViewHolder, position: Int) {
         holder.onBind(items!!.get(position))
-
+        holder.itemView.setOnClickListener {
+        }
 
     }
+
 
     override fun getItemCount(): Int {
         //Log.i(TAG, "list size = ${items!!.isEmpty()}")

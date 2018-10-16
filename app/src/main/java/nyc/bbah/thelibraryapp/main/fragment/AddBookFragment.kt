@@ -1,4 +1,4 @@
-package nyc.bbah.thelibraryapp
+package nyc.bbah.thelibraryapp.main.fragment
 
 
 import android.os.Bundle
@@ -6,6 +6,7 @@ import android.support.v4.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import nyc.bbah.thelibraryapp.R
 
 
 // TODO: Rename parameter arguments, choose names that match
@@ -17,12 +18,12 @@ private const val ARG_PARAM2 = "param2"
  * A simple [Fragment] subclass.
  *
  */
-class BookDetailsFragment : Fragment() {
+class AddBookFragment : Fragment() {
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?,
                               savedInstanceState: Bundle?): View? {
         // Inflate the layout for this fragment
-        return inflater.inflate(R.layout.fragment_book_details, container, false)
+        return inflater.inflate(R.layout.fragment_add_book, container, false)
     }
 
 
