@@ -12,6 +12,7 @@ import android.view.View
 import kotlinx.android.synthetic.main.activity_main.*
 import nyc.bbah.thelibraryapp.R
 import nyc.bbah.thelibraryapp.RecyclerView.BooksAdapter
+import nyc.bbah.thelibraryapp.main.fragment.AddBookFragment
 import nyc.bbah.thelibraryapp.main.fragment.BookDetailsFragment
 import nyc.bbah.thelibraryapp.model.Book
 import nyc.bbah.thelibraryapp.network.BooksService
@@ -23,6 +24,7 @@ class MainActivity : AppCompatActivity() {
     var call: Call<List<Book>> ?= null
     val mainCall: MainCall = MainCall(BooksService.ApiUtils.books_Service)
     val bookDetailsFragment: BookDetailsFragment = BookDetailsFragment()
+    val addBookFragment: AddBookFragment = AddBookFragment()
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -69,10 +71,16 @@ class MainActivity : AppCompatActivity() {
     override fun onOptionsItemSelected(item: MenuItem?): Boolean {
         return when (item?.itemId) {
             R.id.add_book -> {
+                //TODO: Add Fragment Transaction for AddBookFragment
+                supportFragmentManager.inTransaction {
+                    main_booklistRV.visibility = View.INVISIBLE
+                    replace(R.id.fragment_container, addBookFragment)
+                            .addToBackStack("Book Details Fragement")
+                }
                 true
             }
             R.id.delete_books -> {
-
+                //TODO: Add RetroCall for Delete/clear
                 true
             }
             else -> {

@@ -84,7 +84,7 @@ class BookDetailsFragment : Fragment() {
         //AlertDialogBuilder
         val mBuilder = AlertDialog.Builder(requireActivity())
                 .setView(mDialogView)
-                .setTitle("Login Form")
+                .setTitle("Checkout Book")
         //show dialog
         val  mAlertDialog = mBuilder.show()
         //login button click of custom layout
