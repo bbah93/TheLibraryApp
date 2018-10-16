@@ -2,6 +2,7 @@ package nyc.bbah.thelibraryapp.main
 
 import android.support.v7.app.AppCompatActivity
 import android.os.Bundle
+import android.support.v4.app.Fragment
 import android.support.v4.app.FragmentManager
 import android.support.v4.app.FragmentTransaction
 import android.support.v7.widget.LinearLayoutManager
@@ -10,48 +11,37 @@ import android.view.MenuInflater
 import android.view.MenuItem
 import android.view.View
 import kotlinx.android.synthetic.main.activity_main.*
+import kotlinx.android.synthetic.main.fragment_book_list.*
 import nyc.bbah.thelibraryapp.R
 import nyc.bbah.thelibraryapp.RecyclerView.BooksAdapter
 import nyc.bbah.thelibraryapp.main.fragment.AddBookFragment
 import nyc.bbah.thelibraryapp.main.fragment.BookDetailsFragment
+import nyc.bbah.thelibraryapp.main.fragment.BookListFragment
 import nyc.bbah.thelibraryapp.model.Book
 import nyc.bbah.thelibraryapp.network.BooksService
-import nyc.bbah.thelibraryapp.network.RetrofitClient
 import retrofit2.Call
 
 class MainActivity : AppCompatActivity() {
 
-    var call: Call<List<Book>> ?= null
-    val mainCall: MainCall = MainCall(BooksService.ApiUtils.books_Service)
-    val bookDetailsFragment: BookDetailsFragment = BookDetailsFragment()
     val addBookFragment: AddBookFragment = AddBookFragment()
+    val bookListFragment: BookListFragment = BookListFragment()
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
+        //replaceFragment(bookListFragment)
 
-        mainCall.apiCall {
-            val booksAdapter = BooksAdapter(it, object: MainContract.RecyclerOnClickListener {
-                override fun onItemClick(book: Book) {
-                    supportFragmentManager.inTransaction {
-                        main_booklistRV.visibility = View.INVISIBLE
-                        replace(R.id.fragment_container, BookDetailsFragment.newInstance(book))
-                                .addToBackStack("Book Details Fragement")
+//        supportFragmentManager.inTransaction {
+//            replace(R.id.fragment_container, bookListFragment)
+//        }
+        replaceFragment(bookListFragment)
 
-                    }
-                }
-
-            })
-
-            main_booklistRV.adapter = booksAdapter
-            main_booklistRV.layoutManager = LinearLayoutManager(this)
-        }
     }
 
-    override fun onStop() {
-        super.onStop()
-        call?.cancel()
-    }
+//    override fun onStop() {
+//        super.onStop()
+//        call?.cancel()
+//    }
 
     //create menu for adding and removing book
     override fun onCreateOptionsMenu(menu: Menu): Boolean {
@@ -60,22 +50,14 @@ class MainActivity : AppCompatActivity() {
         return true
     }
 
-    //inline extended fragment func
-    inline fun FragmentManager.inTransaction(func: FragmentTransaction.() -> Unit) {
-        val fragmentTransaction = beginTransaction()
-        fragmentTransaction.func()
-        fragmentTransaction.commit()
-    }
-
 
     override fun onOptionsItemSelected(item: MenuItem?): Boolean {
         return when (item?.itemId) {
             R.id.add_book -> {
-                //TODO: Add Fragment Transaction for AddBookFragment
                 supportFragmentManager.inTransaction {
-                    main_booklistRV.visibility = View.INVISIBLE
+//                    main_booklistRV.visibility = View.INVISIBLE
                     replace(R.id.fragment_container, addBookFragment)
-                            .addToBackStack("Book Details Fragement")
+                            .addToBackStack("AddBook Fragment")
                 }
                 true
             }
@@ -88,10 +70,23 @@ class MainActivity : AppCompatActivity() {
             }
         }
     }
+//    override fun onBackPressed() {
+//        super.onBackPressed()
+//        main_booklistRV.visibility = View.VISIBLE
+//    }
 
-    override fun onBackPressed() {
-        super.onBackPressed()
-        main_booklistRV.visibility = View.VISIBLE
-
+    //Fragment Transactions
+    private fun replaceFragment(fragment: Fragment) {
+        val fragmentTransaction = supportFragmentManager.beginTransaction()
+        fragmentTransaction.replace(R.id.fragment_container, fragment)
+        fragmentTransaction.commit()
     }
+
+    //inline extended fragment func
+    inline fun FragmentManager.inTransaction(func: FragmentTransaction.() -> Unit) {
+        val fragmentTransaction = beginTransaction()
+        fragmentTransaction.func()
+        fragmentTransaction.commit()
+    }
+
 }
