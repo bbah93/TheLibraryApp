@@ -9,7 +9,6 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.Button
 import android.widget.TextView
-import kotlinx.android.synthetic.main.activity_main.*
 import kotlinx.android.synthetic.main.checkout_dialog.view.*
 import nyc.bbah.thelibraryapp.R
 import nyc.bbah.thelibraryapp.model.Book
@@ -54,7 +53,7 @@ class BookDetailsFragment : Fragment() {
         checkoutInfo = rootView.findViewById(R.id.checkoutTextView)
         val checkoutButton: Button = rootView.findViewById(R.id.checkoutButton)
         val deleteButton: Button = rootView.findViewById(R.id.deleteButton)
-        val book = arguments!!.getParcelable<Book>(ARG_PARAM1)
+        val book = arguments?.getParcelable<Book>(ARG_PARAM1)
         setViews(book)
 
         checkoutButton.setOnClickListener {
@@ -69,11 +68,11 @@ class BookDetailsFragment : Fragment() {
         return rootView
     }
 
-    fun setViews(book: Book){
-        bookTitle.text = book.title
-        author.text = book.author
-        publisher.text = book.publisher
-        tags.text = book.category
+    fun setViews(book: Book?){
+        bookTitle.text = book?.title
+        author.text = book?.author
+        publisher.text = book?.publisher
+        tags.text = book?.category
 
        //TODO: Put Checkout data here with concatenated data (time stamp + name)
     }
