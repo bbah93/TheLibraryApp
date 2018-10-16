@@ -33,7 +33,9 @@ class MainActivity : AppCompatActivity() {
                 override fun onItemClick(book: Book) {
                     supportFragmentManager.inTransaction {
                         main_booklistRV.visibility = View.INVISIBLE
-                        add(R.id.fragment_container, BookDetailsFragment.newInstance(book))
+                        replace(R.id.fragment_container, BookDetailsFragment.newInstance(book))
+                                .addToBackStack("Book Details Fragement")
+
                     }
                 }
 
@@ -77,5 +79,11 @@ class MainActivity : AppCompatActivity() {
                 super.onOptionsItemSelected(item)
             }
         }
+    }
+
+    override fun onBackPressed() {
+        super.onBackPressed()
+        main_booklistRV.visibility = View.VISIBLE
+
     }
 }

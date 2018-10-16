@@ -9,6 +9,7 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.Button
 import android.widget.TextView
+import kotlinx.android.synthetic.main.activity_main.*
 import kotlinx.android.synthetic.main.checkout_dialog.view.*
 import nyc.bbah.thelibraryapp.R
 import nyc.bbah.thelibraryapp.model.Book
@@ -63,6 +64,8 @@ class BookDetailsFragment : Fragment() {
         deleteButton.setOnClickListener {
             deleteBookListener()
         }
+
+        //onDestroyView()
         return rootView
     }
 
