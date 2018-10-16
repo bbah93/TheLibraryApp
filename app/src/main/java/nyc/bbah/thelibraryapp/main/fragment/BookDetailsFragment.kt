@@ -3,11 +3,13 @@ package nyc.bbah.thelibraryapp.main.fragment
 
 import android.os.Bundle
 import android.support.v4.app.Fragment
+import android.support.v7.app.AlertDialog
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.Button
 import android.widget.TextView
+import kotlinx.android.synthetic.main.checkout_dialog.view.*
 import nyc.bbah.thelibraryapp.R
 import nyc.bbah.thelibraryapp.model.Book
 
@@ -22,11 +24,22 @@ private const val ARG_PARAM2 = "param2"
  *
  */
 class BookDetailsFragment : Fragment() {
-    private var bookTitle: TextView? = null
-    var author: TextView? = null
-    var publisher: TextView? = null
-    var tags: TextView? = null
-    var checkoutInfo: TextView? = null
+
+    lateinit var bookTitle: TextView
+    lateinit var author: TextView
+    lateinit var publisher: TextView
+    lateinit var tags: TextView
+    lateinit var checkoutInfo: TextView
+
+    companion object {
+        fun newInstance(book: Book) : BookDetailsFragment {
+            return BookDetailsFragment().apply {
+                arguments = Bundle().apply {
+                    putParcelable(ARG_PARAM1, book)
+                }
+            }
+        }
+    }
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?,
                               savedInstanceState: Bundle?): View? {
@@ -40,20 +53,46 @@ class BookDetailsFragment : Fragment() {
         checkoutInfo = rootView.findViewById(R.id.checkoutTextView)
         val checkoutButton: Button = rootView.findViewById(R.id.checkoutButton)
 
+        val book = arguments!!.getParcelable<Book>(ARG_PARAM1)
+        setViews(book)
+
         checkoutButton.setOnClickListener {
-            //TODO: Alert dialogue box to grab name for checkout
-            //TODO: Make API call to update book with checkout info
+            chekoutListener()
         }
         return rootView
     }
 
     fun setViews(book: Book){
-        bookTitle?.text = book.title
-        author?.text = book.author
-        publisher?.text = book.publisher
-        tags?.text = book.category
+        bookTitle.text = book.title
+        author.text = book.author
+        publisher.text = book.publisher
+        tags.text = book.category
 
        //TODO: Put Checkout data here with concatenated data (time stamp + name)
     }
 
+    fun chekoutListener(){
+        //Inflate the dialog with custom view
+        val mDialogView = LayoutInflater.from(activity).inflate(R.layout.checkout_dialog, null)
+        //AlertDialogBuilder
+        val mBuilder = AlertDialog.Builder(requireActivity())
+                .setView(mDialogView)
+                .setTitle("Login Form")
+        //show dialog
+        val  mAlertDialog = mBuilder.show()
+        //login button click of custom layout
+        mDialogView.dialogCheckoutBtn.setOnClickListener {
+            //dismiss dialog
+            //TODO: Make API call to update book with checkout info
+            mAlertDialog.dismiss()
+            //get text from EditTexts of custom layout
+            val name = mDialogView.dialogNameEt.text.toString()
+
+        }
+        //cancel button click of custom layout
+        mDialogView.dialogCancelBtn.setOnClickListener {
+            //dismiss dialog
+            mAlertDialog.dismiss()
+        }
+    }
 }

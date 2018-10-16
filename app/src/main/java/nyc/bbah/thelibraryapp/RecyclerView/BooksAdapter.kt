@@ -10,18 +10,19 @@ import nyc.bbah.thelibraryapp.R.*
 import nyc.bbah.thelibraryapp.main.MainContract
 import nyc.bbah.thelibraryapp.model.Book
 
-class BooksAdapter(val items: List<Book>?) : RecyclerView.Adapter<BooksViewHolder>() {
+class BooksAdapter(val items: List<Book>?, val clickListener: MainContract.RecyclerOnClickListener) : RecyclerView.Adapter<BooksViewHolder>() {
 
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): BooksViewHolder {
-        return BooksViewHolder(LayoutInflater.from(parent.context).inflate(layout.books_item, parent, false))
+        return BooksViewHolder(
+                LayoutInflater.from(parent.context).inflate(layout.books_item, parent, false),
+                clickListener)
     }
 
     override fun onBindViewHolder(holder: BooksViewHolder, position: Int) {
-        holder.onBind(items!!.get(position))
-        holder.itemView.setOnClickListener {
-        }
+        val book = items!!.get(position)
 
+        holder.onBind(book)
     }
 
 
