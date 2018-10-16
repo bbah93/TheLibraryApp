@@ -52,12 +52,16 @@ class BookDetailsFragment : Fragment() {
         tags = rootView.findViewById(R.id.tagsTextView)
         checkoutInfo = rootView.findViewById(R.id.checkoutTextView)
         val checkoutButton: Button = rootView.findViewById(R.id.checkoutButton)
-
+        val deleteButton: Button = rootView.findViewById(R.id.deleteButton)
         val book = arguments!!.getParcelable<Book>(ARG_PARAM1)
         setViews(book)
 
         checkoutButton.setOnClickListener {
             chekoutListener()
+        }
+
+        deleteButton.setOnClickListener {
+            deleteBookListener()
         }
         return rootView
     }
@@ -81,18 +85,44 @@ class BookDetailsFragment : Fragment() {
         //show dialog
         val  mAlertDialog = mBuilder.show()
         //login button click of custom layout
-        mDialogView.dialogCheckoutBtn.setOnClickListener {
+        mDialogView.dialogDeleteBtn.setOnClickListener {
             //dismiss dialog
             //TODO: Make API call to update book with checkout info
             mAlertDialog.dismiss()
             //get text from EditTexts of custom layout
-            val name = mDialogView.dialogNameEt.text.toString()
+            val name = mDialogView.dialogDeleteTextView.text.toString()
 
         }
         //cancel button click of custom layout
-        mDialogView.dialogCancelBtn.setOnClickListener {
+        mDialogView.deleteCancelBtn.setOnClickListener {
             //dismiss dialog
             mAlertDialog.dismiss()
         }
     }
+
+    fun deleteBookListener(){
+//Inflate the dialog with custom view
+        val mDialogView = LayoutInflater.from(activity).inflate(R.layout.deletebook_dialog, null)
+        //AlertDialogBuilder
+        val mBuilder = AlertDialog.Builder(requireActivity())
+                .setView(mDialogView)
+        //show dialog
+        val  mAlertDialog = mBuilder.show()
+        //login button click of custom layout
+        mDialogView.dialogDeleteBtn.setOnClickListener {
+            //dismiss dialog
+            //TODO: Make API call to delete book
+            mAlertDialog.dismiss()
+            //get text from EditTexts of custom layout
+            val name = mDialogView.dialogDeleteTextView.text.toString()
+
+        }
+        //cancel button click of custom layout
+        mDialogView.deleteCancelBtn.setOnClickListener {
+            //dismiss dialog
+            mAlertDialog.dismiss()
+        }
+    }
+
+
 }

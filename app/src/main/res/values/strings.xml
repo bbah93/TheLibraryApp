@@ -12,4 +12,7 @@
     <string name="categories">Categories</string>
     <string name="submit">Submit</string>
     <string name="enter_name">Enter Name</string>
+    <string name="delete_book">Delete</string>
+    <string name="do_you_want_to_delete_this_book">Do You Want To Delete This Book?</string>
+    <string name="delete">Delete</string>
 </resources>
