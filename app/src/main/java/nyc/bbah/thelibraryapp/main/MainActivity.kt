@@ -8,9 +8,10 @@ import android.support.v7.widget.LinearLayoutManager
 import android.view.Menu
 import android.view.MenuInflater
 import android.view.MenuItem
+import android.view.View
+import kotlinx.android.synthetic.main.activity_main.*
 import nyc.bbah.thelibraryapp.R
 import nyc.bbah.thelibraryapp.RecyclerView.BooksAdapter
-import kotlinx.android.synthetic.main.activity_main.main_booklistRV
 import nyc.bbah.thelibraryapp.main.fragment.BookDetailsFragment
 import nyc.bbah.thelibraryapp.model.Book
 import nyc.bbah.thelibraryapp.network.BooksService
@@ -31,9 +32,11 @@ class MainActivity : AppCompatActivity() {
             val booksAdapter = BooksAdapter(it, object: MainContract.RecyclerOnClickListener {
                 override fun onItemClick(book: Book) {
                     supportFragmentManager.inTransaction {
-                        replace(R.id.fragment_container, BookDetailsFragment.newInstance(book))
+                        main_booklistRV.visibility = View.INVISIBLE
+                        add(R.id.fragment_container, BookDetailsFragment.newInstance(book))
                     }
                 }
+
             })
 
             main_booklistRV.adapter = booksAdapter
@@ -52,8 +55,8 @@ class MainActivity : AppCompatActivity() {
         inflater.inflate(R.menu.main_menu, menu)
         return true
     }
-//    inline extended fragment func
 
+    //inline extended fragment func
     inline fun FragmentManager.inTransaction(func: FragmentTransaction.() -> Unit) {
         val fragmentTransaction = beginTransaction()
         fragmentTransaction.func()
