@@ -1,14 +1,13 @@
 package nyc.bbah.thelibraryapp.main
 
-import android.content.ContentValues.TAG
-import android.util.Log
+
 import nyc.bbah.thelibraryapp.model.Book
 import nyc.bbah.thelibraryapp.network.BooksService
 import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
 
-class MainCall(val bookService: BooksService) : MainContract.Network {
+class MainCall(private val bookService: BooksService) : MainContract.Network {
     //make network call to get List of Books. super from contract
     override fun apiCall(onSuccess: (List<Book>) -> Unit): Call<List<Book>> {
         val call = bookService.getBooks()

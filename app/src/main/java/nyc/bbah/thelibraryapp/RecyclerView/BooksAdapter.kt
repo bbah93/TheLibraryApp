@@ -1,12 +1,10 @@
 package nyc.bbah.thelibraryapp.RecyclerView
 
 
-import android.support.v4.app.FragmentManager
-import android.support.v4.app.FragmentTransaction
 import android.support.v7.widget.RecyclerView
 import android.view.LayoutInflater
 import android.view.ViewGroup
-import nyc.bbah.thelibraryapp.R.*
+import nyc.bbah.thelibraryapp.R.layout
 import nyc.bbah.thelibraryapp.main.MainContract
 import nyc.bbah.thelibraryapp.model.Book
 
@@ -20,14 +18,12 @@ class BooksAdapter(val items: List<Book>?, val clickListener: MainContract.Recyc
     }
 
     override fun onBindViewHolder(holder: BooksViewHolder, position: Int) {
-        val book = items!!.get(position)
-
+        val book = items!![position]
         holder.onBind(book)
     }
 
 
     override fun getItemCount(): Int {
-        //Log.i(TAG, "list size = ${items!!.isEmpty()}")
         if (items != null) {
             return items.size
         }
