@@ -20,7 +20,7 @@ interface BooksService {
     fun updateBook(@Path("id") bookId: Int, @Body updateBookBody: UpdateBookBody): Call<Book>
 
     @DELETE("books/{id}")
-    fun deleteBook(@Field("id") id: Int): Call<Unit>
+    fun deleteBook(@Path("id") id: Int): Call<Unit>
 
     @DELETE("clean")
     fun deleteAllBooks(): Call<Unit>
