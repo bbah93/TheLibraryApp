@@ -11,16 +11,16 @@ interface BooksService {
     fun getBooks(): Call<List<Book>>
 
     @GET("books/{id}")
-    fun getABook(@Field("id") bookId: Int): Call<Book>
+    fun getABook(@Path("id") bookId: Int): Call<Book>
 
-    @POST("books/{id}")
-    fun addBook(@Path("id")id: Int): Call<Unit>
+    @POST("books/{book}")
+    fun addBook(@Body book: Book): Call<Book>
 
     @PUT("books/{id}")
-    fun updateBook(@Path("id") bookId: Int, @Body updateBookBody: UpdateBookBody): Call<Book>
+    fun updateBook(@Path("id") bookId: Int, @Body book: Book): Call<Book>
 
     @DELETE("books/{id}")
-    fun deleteBook(@Field("id") id: Int): Call<Unit>
+    fun deleteBook(@Path("id") id: Int): Call<Unit>
 
     @DELETE("clean")
     fun deleteAllBooks(): Call<Unit>

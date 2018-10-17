@@ -3,10 +3,14 @@ package nyc.bbah.thelibraryapp.main
 import android.os.Bundle
 import android.support.v4.app.FragmentManager
 import android.support.v4.app.FragmentTransaction
+import android.support.v7.app.AlertDialog
 import android.support.v7.app.AppCompatActivity
+import android.view.LayoutInflater
 import android.view.Menu
 import android.view.MenuInflater
 import android.view.MenuItem
+import android.widget.Toast
+import kotlinx.android.synthetic.main.checkout_dialog.view.*
 import nyc.bbah.thelibraryapp.R
 import nyc.bbah.thelibraryapp.main.fragment.AddBookFragment
 import nyc.bbah.thelibraryapp.main.fragment.BookListFragment
@@ -42,7 +46,29 @@ class MainActivity : AppCompatActivity() {
                 true
             }
             R.id.delete_books -> {
-                //TODO: Add RetroCall for Delete/clear
+
+                    //Inflate the dialog with custom view
+                    val mDialogView = LayoutInflater.from(this).inflate(R.layout.deletebook_dialog, null)
+                    //AlertDialogBuilder
+                    val mBuilder = AlertDialog.Builder(this)
+                            .setView(mDialogView)
+                    //show dialog
+                    val  mAlertDialog = mBuilder.show()
+                    //login button click of custom layout
+                    mDialogView.dialogDeleteBtn.setOnClickListener {
+                        //TODO: Make API call to delete book
+                        //dismiss dialog
+                        mAlertDialog.dismiss()
+                        //get text from EditTexts of custom layout
+                        mainCall.deleteAll()
+                        Toast.makeText(this, "Deleted All", Toast.LENGTH_LONG).show()
+                    }
+                    //cancel button click of custom layout
+                    mDialogView.deleteCancelBtn.setOnClickListener {
+                        //dismiss dialog
+                        mAlertDialog.dismiss()
+                    }
+
                 true
             }
             else -> {

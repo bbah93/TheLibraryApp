@@ -5,10 +5,13 @@ import android.os.Bundle
 import android.support.v4.app.Fragment
 import android.support.v4.app.FragmentManager
 import android.support.v4.app.FragmentTransaction
+import android.support.v7.app.AlertDialog
 import android.support.v7.widget.LinearLayoutManager
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.Toast
+import kotlinx.android.synthetic.main.checkout_dialog.view.*
 import kotlinx.android.synthetic.main.fragment_book_list.*
 import nyc.bbah.thelibraryapp.R
 import nyc.bbah.thelibraryapp.RecyclerView.BooksAdapter
@@ -16,6 +19,7 @@ import nyc.bbah.thelibraryapp.main.MainCall
 import nyc.bbah.thelibraryapp.main.MainContract
 import nyc.bbah.thelibraryapp.model.Book
 import nyc.bbah.thelibraryapp.network.BooksService
+import retrofit2.Call
 
 // TODO: Rename parameter arguments, choose names that match
 // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
@@ -27,7 +31,8 @@ private const val ARG_PARAM2 = "param2"
  *
  */
 class BookListFragment : Fragment() {
-//    var call: Call<List<Book>>?= null
+
+    var call: Call<List<Book>>?= null
     val mainCall: MainCall = MainCall(BooksService.ApiUtils.books_Service)
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?,
                               savedInstanceState: Bundle?): View? {
@@ -58,6 +63,12 @@ class BookListFragment : Fragment() {
             main_booklistRV.layoutManager = LinearLayoutManager(requireActivity())
             main_booklistRV.adapter = booksAdapter
         }
+    }
+
+
+        override fun onStop() {
+        super.onStop()
+        call?.cancel()
     }
 
 }

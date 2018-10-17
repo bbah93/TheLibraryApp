@@ -16,4 +16,6 @@
     <string name="do_you_want_to_delete_this_book">Do You Want To Delete This Book?</string>
     <string name="delete">Delete</string>
     <string name="delete_all_books">Delete All Books</string>
+    <string name="do_you_want_to_delete_all_books">Do You Want To Delete All Books?</string>
+    <string name="cancel">Cancel</string>
 </resources>
