@@ -9,15 +9,15 @@ interface MainContract {
     interface Network{
         fun bookListApiCall(onSuccess: (List<Book>) -> Unit): Call<List<Book>>
 
-        //fun checkout(onSuccess: (Book) -> Book): Call<Book>
+        fun checkout(id: Int, onSuccess: (Book) -> Book): Call<Book>
 
-        fun delete(id: Int): Call<Unit>
+        fun delete(id: Int, onSuccess: (List<Book>) -> Unit): Call<Unit>
 
-        fun deleteAll(): Call<Unit>
+        fun deleteAll(onSuccess: (List<Book>) -> Unit): Call<Unit>
 
-        fun getBook(id: Int): Call<Book>?
+        fun getBook(id: Int, onSuccess: (List<Book>) -> Unit): Call<Book>?
 
-        fun addBook(book: Book): Call<Book>
+        fun addBook(book: Book, onSuccess: (Book) -> Unit): Call<Book>
     }
 
     interface RecyclerOnClickListener {

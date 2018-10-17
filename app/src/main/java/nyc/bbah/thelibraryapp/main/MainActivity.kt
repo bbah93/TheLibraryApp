@@ -60,7 +60,7 @@ class MainActivity : AppCompatActivity() {
                         //dismiss dialog
                         mAlertDialog.dismiss()
                         //get text from EditTexts of custom layout
-                        mainCall.deleteAll()
+                        mainCall.deleteAll({})
                         Toast.makeText(this, "Deleted All", Toast.LENGTH_LONG).show()
                     }
                     //cancel button click of custom layout
@@ -68,7 +68,6 @@ class MainActivity : AppCompatActivity() {
                         //dismiss dialog
                         mAlertDialog.dismiss()
                     }
-
                 true
             }
             else -> {
@@ -82,5 +81,8 @@ class MainActivity : AppCompatActivity() {
         fragmentTransaction.func()
         fragmentTransaction.commit()
     }
+
+
+
 
 }

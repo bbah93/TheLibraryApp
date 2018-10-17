@@ -96,7 +96,7 @@ class BookDetailsFragment : Fragment() {
             mAlertDialog.dismiss()
             //get text from EditTexts
             val name = mDialogView.dialogDeleteTextView.text.toString()
-
+            //mainCall.checkout(book.id)
         }
         //cancel button click of custom layout
         mDialogView.deleteCancelBtn.setOnClickListener {
@@ -119,11 +119,13 @@ class BookDetailsFragment : Fragment() {
             //dismiss dialog
             mAlertDialog.dismiss()
             //get text from EditTexts of custom layout
-            mainCall.delete(book.id!!)
-            Toast.makeText(requireActivity(), "Deleted ${bookTitle.text}", Toast.LENGTH_LONG).show()
-            fragmentManager?.inTransaction {
-                replace(R.id.fragment_container, bookListFragment )
+            mainCall.delete(book.id!!) {
+                fragmentManager?.inTransaction {
+                    replace(R.id.fragment_container, bookListFragment )
+                }
             }
+            Toast.makeText(requireActivity(), "Deleted ${bookTitle.text}", Toast.LENGTH_LONG).show()
+
 
         }
         //cancel button click of custom layout
