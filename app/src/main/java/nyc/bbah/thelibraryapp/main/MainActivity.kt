@@ -20,7 +20,7 @@ class MainActivity : AppCompatActivity() {
 
     private val addBookFragment: AddBookFragment = AddBookFragment()
     private val bookListFragment: BookListFragment = BookListFragment()
-    val mainCall: MainCall = MainCall(BooksService.ApiUtils.books_Service)
+    private val mainCall: MainCall = MainCall(BooksService.ApiUtils.books_Service)
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
