@@ -2,6 +2,7 @@ package nyc.bbah.thelibraryapp.main.fragment
 
 
 import android.os.Bundle
+import android.os.Parcel
 import android.support.v4.app.Fragment
 import android.support.v4.app.FragmentManager
 import android.support.v4.app.FragmentTransaction
@@ -92,11 +93,14 @@ class BookDetailsFragment : Fragment() {
 
         mDialogView.dialogDeleteBtn.setOnClickListener {
             //dismiss dialog
-            //TODO: Make API call to update book with checkout info
+            mainCall.checkout(book.id!!){
+                fragmentManager?.inTransaction {
+                    replace(R.id.fragment_container, bookListFragment )
+                }
+            }
             mAlertDialog.dismiss()
             //get text from EditTexts
             val name = mDialogView.dialogDeleteTextView.text.toString()
-            //mainCall.checkout(book.id)
         }
         //cancel button click of custom layout
         mDialogView.deleteCancelBtn.setOnClickListener {
@@ -114,7 +118,7 @@ class BookDetailsFragment : Fragment() {
         //show dialog
         val  mAlertDialog = mBuilder.show()
         //login button click of custom layout
-        mDialogView.dialogDeleteBtn.setOnClickListener {
+        mDialogView.dialogDeleteBtn.setOnClickListener { view: View ->
             //TODO: Make API call to delete book
             //dismiss dialog
             mAlertDialog.dismiss()

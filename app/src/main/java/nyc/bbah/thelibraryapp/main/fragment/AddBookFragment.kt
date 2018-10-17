@@ -3,6 +3,9 @@ package nyc.bbah.thelibraryapp.main.fragment
 
 import android.os.Bundle
 import android.support.v4.app.Fragment
+import android.support.v4.app.FragmentManager
+import android.support.v4.app.FragmentTransaction
+import android.text.TextUtils.replace
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -37,6 +40,8 @@ class AddBookFragment : Fragment() {
     lateinit var bookPublisher: EditText
     lateinit var bookCategories: EditText
     //var book: Book = Book()
+    val bookListFragment: BookListFragment = BookListFragment()
+
 
 
 
@@ -65,6 +70,9 @@ class AddBookFragment : Fragment() {
                 val book = Book(bookAuthor.toString(), bookTitle.toString(),
                         bookCategories.toString(), bookPublisher.toString(), BASE_URL, 33, dateInString, "")
                 mainCall.addBook(book) {
+                    fragmentManager?.inTransaction {
+                        replace(R.id.fragment_container, bookListFragment )
+                    }
                 }
             }
         }
@@ -78,5 +86,11 @@ class AddBookFragment : Fragment() {
 
     fun getCurrentDateTime(): Date {
         return Calendar.getInstance().time
+    }
+
+    inline fun FragmentManager.inTransaction(func: FragmentTransaction.() -> Unit) {
+        val fragmentTransaction = beginTransaction()
+        fragmentTransaction.func()
+        fragmentTransaction.commit()
     }
 }

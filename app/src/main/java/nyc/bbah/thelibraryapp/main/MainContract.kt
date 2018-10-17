@@ -9,9 +9,9 @@ interface MainContract {
     interface Network{
         fun bookListApiCall(onSuccess: (List<Book>) -> Unit): Call<List<Book>>
 
-        fun checkout(id: Int, onSuccess: (Book) -> Book): Call<Book>
+        fun checkout(id: Int, onSuccess: (Book) -> Unit): Call<Book>
 
-        fun delete(id: Int, onSuccess: (List<Book>) -> Unit): Call<Unit>
+        fun delete(id: Int, onSuccess: (Unit) -> Unit): Call<Unit>
 
         fun deleteAll(onSuccess: (List<Book>) -> Unit): Call<Unit>
 

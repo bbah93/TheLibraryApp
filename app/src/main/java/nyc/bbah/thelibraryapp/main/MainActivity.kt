@@ -61,6 +61,10 @@ class MainActivity : AppCompatActivity() {
                         mAlertDialog.dismiss()
                         //get text from EditTexts of custom layout
                         mainCall.deleteAll({})
+
+                        supportFragmentManager?.inTransaction {
+                            replace(R.id.fragment_container, bookListFragment )
+                        }
                         Toast.makeText(this, "Deleted All", Toast.LENGTH_LONG).show()
                     }
                     //cancel button click of custom layout

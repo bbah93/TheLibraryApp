@@ -13,7 +13,7 @@ interface BooksService {
     @GET("books/{id}")
     fun getABook(@Path("id") bookId: Int): Call<Book>
 
-    @POST("books/{book}")
+    @POST("books")
     fun addBook(@Body book: Book): Call<Book>
 
     @PUT("books/{id}")
