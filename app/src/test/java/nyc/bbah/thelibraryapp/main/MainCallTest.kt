@@ -4,8 +4,6 @@ import com.nhaarman.mockitokotlin2.*
 import nyc.bbah.thelibraryapp.model.Book
 import nyc.bbah.thelibraryapp.network.BooksService
 import org.junit.Test
-import org.mockito.Mockito.`when`
-import org.mockito.Mockito.mock
 import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
@@ -21,7 +19,7 @@ class MainCallTest {
         val onSuccess = mock<(List<Book>) -> Unit>()
         whenever(bookService.getBooks()).thenReturn(mockCall)
 
-        val returnedCall = mainCall.apiCall(onSuccess)
+        val returnedCall = mainCall.bookListApiCall(onSuccess)
         assert(returnedCall == mockCall)
     }
 
@@ -36,7 +34,7 @@ class MainCallTest {
         val onSuccess = mock<(List<Book>) -> Unit>()
         whenever(bookService.getBooks()).thenReturn(mockCall)
 
-        mainCall.apiCall(onSuccess)
+        mainCall.bookListApiCall(onSuccess)
 
         verify(mockCall).enqueue(argumentCaptor.capture())
         argumentCaptor.firstValue.onResponse(mockCall, response)

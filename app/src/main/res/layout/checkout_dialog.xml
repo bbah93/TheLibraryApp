@@ -8,7 +8,7 @@
     android:padding="10dp">
 
     <EditText
-        android:id="@+id/dialogDeleteTextView"
+        android:id="@+id/dialogCheckoutTextView"
         android:hint="@string/enter_name"
         android:inputType="textPersonName"
         android:layout_width="match_parent"

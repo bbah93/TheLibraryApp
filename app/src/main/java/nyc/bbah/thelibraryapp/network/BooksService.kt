@@ -1,6 +1,7 @@
 package nyc.bbah.thelibraryapp.network
 
 import nyc.bbah.thelibraryapp.model.Book
+import nyc.bbah.thelibraryapp.model.UpdateBookBody
 import retrofit2.Call
 import retrofit2.http.*
 
@@ -12,12 +13,11 @@ interface BooksService {
     @GET("books/{id}")
     fun getABook(@Field("id") bookId: Int): Call<Book>
 
-    @POST("books")
-    fun addBook(@Field("author") author: String, @Field("title") title: String,
-                @Field("publisher") publisher: String, @Field("categories") categories: String): Call<Unit>
+    @POST("books/{id}")
+    fun addBook(@Path("id")id: Int): Call<Unit>
 
     @PUT("books/{id}")
-    fun updateBook(@Field("id") bookId: Int, @Field("lastCheckoutBy") lastCheckoutBy: String): Call<Unit>
+    fun updateBook(@Path("id") bookId: Int, @Body updateBookBody: UpdateBookBody): Call<Book>
 
     @DELETE("books/{id}")
     fun deleteBook(@Field("id") id: Int): Call<Unit>

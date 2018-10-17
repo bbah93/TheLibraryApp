@@ -7,7 +7,9 @@ interface MainContract {
 
     //inner interface for call to server used in main
     interface Network{
-        fun apiCall(onSuccess: (List<Book>) -> Unit): Call<List<Book>>
+        fun bookListApiCall(onSuccess: (List<Book>) -> Unit): Call<List<Book>>
+        //fun checkoutApiCall(book: Book): Call<Book>
+        fun delete(id: Int): Call<Unit>
     }
 
     interface RecyclerOnClickListener {

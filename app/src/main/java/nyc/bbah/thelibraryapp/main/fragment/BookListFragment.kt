@@ -46,7 +46,7 @@ class BookListFragment : Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        mainCall.apiCall {
+        mainCall.bookListApiCall {
             val booksAdapter = BooksAdapter(it, object: MainContract.RecyclerOnClickListener {
                 override fun onItemClick(book: Book) {
                     fragmentManager?.inTransaction {

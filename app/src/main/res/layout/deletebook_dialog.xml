@@ -8,7 +8,7 @@
     android:padding="10dp">
 
     <TextView
-        android:id="@+id/dialogDeleteTextView"
+        android:id="@+id/dialogCheckoutTextView"
         android:hint="@string/do_you_want_to_delete_this_book"
         android:gravity="center"
         android:layout_width="match_parent"

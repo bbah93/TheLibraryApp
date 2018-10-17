@@ -1,6 +1,7 @@
 package nyc.bbah.thelibraryapp.main
 
 
+import android.util.Log
 import nyc.bbah.thelibraryapp.model.Book
 import nyc.bbah.thelibraryapp.network.BooksService
 import retrofit2.Call
@@ -8,8 +9,25 @@ import retrofit2.Callback
 import retrofit2.Response
 
 class MainCall(private val bookService: BooksService) : MainContract.Network {
+
+    override fun delete(id: Int): Call<Unit> {
+        val call: Call<Unit> = bookService.deleteBook(id)
+
+        call.enqueue(object : Callback<Unit> {
+            override fun onResponse(call: Call<Unit>, response: Response<Unit>) {
+                val data : Unit? = response.body()
+                Log.d("DELETE CHECK", response.body().toString())
+            }
+            override fun onFailure(call: Call<Unit>, t: Throwable) {
+                t.printStackTrace()
+            }
+        })
+        return call
+    }
+
+
     //make network call to get List of Books. super from contract
-    override fun apiCall(onSuccess: (List<Book>) -> Unit): Call<List<Book>> {
+    override fun bookListApiCall(onSuccess: (List<Book>) -> Unit): Call<List<Book>> {
         val call = bookService.getBooks()
 
         call.enqueue(object : Callback<List<Book>> {
@@ -24,4 +42,6 @@ class MainCall(private val bookService: BooksService) : MainContract.Network {
         })
         return call
     }
+
+
 }
