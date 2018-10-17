@@ -6,7 +6,6 @@ import android.support.v4.app.Fragment
 import android.support.v4.app.FragmentManager
 import android.support.v4.app.FragmentTransaction
 import android.support.v7.app.AlertDialog
-import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -96,7 +95,7 @@ class BookDetailsFragment : Fragment() {
             //TODO: Make API call to update book with checkout info
             mAlertDialog.dismiss()
             //get text from EditTexts
-            val name = mDialogView.dialogCheckoutTextView.text.toString()
+            val name = mDialogView.dialogDeleteTextView.text.toString()
 
         }
         //cancel button click of custom layout
