@@ -34,7 +34,7 @@ class BookDetailsFragment : Fragment() {
     lateinit var checkoutInfo: TextView
     val mainCall: MainCall = MainCall(BooksService.ApiUtils.books_Service)
     val book = arguments?.getParcelable<Book>(ARG_PARAM1)
-    val id = book!!.id
+//    val id = book!!.id
 
 
     companion object {

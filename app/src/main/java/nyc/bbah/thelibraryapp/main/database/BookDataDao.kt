@@ -11,18 +11,14 @@ interface BookDataDao {
     @Insert(onConflict = REPLACE)
     fun insertAll(bookData: BookData)
 
-
     @Query("SELECT * FROM bookData WHERE title LIKE title LIMIT 1")
     fun findByName(title: String): Int
 
     @Query("SELECT * FROM bookData WHERE id LIKE id LIMIT 1")
     fun findByID(id: Int): BookData
 
-    @Update
-    fun updateBook(id: Int, lastCheckoutBy: String, lastCheckedOut: String )
-
     @Update(onConflict = REPLACE)
-    fun updateCheckoutTime()
+    fun updateCheckout(id: Int, lastCheckedOut: String, lastCheckoutBy: String)
 
     @Query("DELETE from bookData")
     fun deleteAll()
