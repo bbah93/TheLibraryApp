@@ -13,7 +13,7 @@ interface MainContract {
 
         fun delete(id: Int, onSuccess: (Unit) -> Unit): Call<Unit>
 
-        fun deleteAll(onSuccess: (List<Book>) -> Unit): Call<Unit>
+        fun deleteAll(onSuccess: (Unit) -> Unit): Call<Unit>
 
         fun getBook(id: Int, onSuccess: (List<Book>) -> Unit): Call<Book>?
 
