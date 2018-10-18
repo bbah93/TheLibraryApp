@@ -10,6 +10,7 @@ import retrofit2.Response
 
 class MainCall(private val bookService: BooksService) : MainContract.Network {
 
+
     override fun checkout(id: Int, onSuccess: (Book) -> Unit): Call<Book> {
         val book : Book = Book("", "", "", "", "", 22, "", "")
         val call: Call<Book> = bookService.updateBook(id, book)
@@ -62,6 +63,7 @@ class MainCall(private val bookService: BooksService) : MainContract.Network {
         call.enqueue(object : Callback<Book>{
             override fun onResponse(call: Call<Book>, response: Response<Book>) {
                 val data : Book? = response.body()
+                Log.d("GET BOOK CHECK: ", data.toString())
 
             }
             override fun onFailure(call: Call<Book>, t: Throwable) {
@@ -79,6 +81,7 @@ class MainCall(private val bookService: BooksService) : MainContract.Network {
             override fun onResponse(call: Call<List<Book>>, response: Response<List<Book>>) {
                 val data = response.body()
                 data?.let(onSuccess)
+                Log.d("DELETE CHECK: ", response.raw().toString())
             }
             override fun onFailure(call: Call<List<Book>>, t: Throwable) {
                 t.printStackTrace()

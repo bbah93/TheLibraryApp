@@ -1,7 +1,6 @@
 package nyc.bbah.thelibraryapp.network
 
 import nyc.bbah.thelibraryapp.model.Book
-import nyc.bbah.thelibraryapp.model.UpdateBookBody
 import retrofit2.Call
 import retrofit2.http.*
 
@@ -20,7 +19,7 @@ interface BooksService {
     fun updateBook(@Path("id") bookId: Int, @Body book: Book): Call<Book>
 
     @DELETE("books/{id}")
-    fun deleteBook(@Path("id") id: Int): Call<Unit>
+    fun deleteBook(@Path("id") id: Int?): Call<Unit>
 
     @DELETE("clean")
     fun deleteAllBooks(): Call<Unit>

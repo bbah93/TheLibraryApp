@@ -20,7 +20,6 @@ import nyc.bbah.thelibraryapp.network.BooksService
 
 
 private const val ARG_PARAM1 = "param1"
-private const val ARG_PARAM2 = "param2"
 
 /**
  * A simple [Fragment] subclass.
@@ -38,7 +37,7 @@ class BookDetailsFragment : Fragment() {
 
 
     companion object {
-        fun newInstance(book: Book) : BookDetailsFragment {
+        fun newInstance(book: Book?) : BookDetailsFragment {
             return BookDetailsFragment().apply {
                 arguments = Bundle().apply {
                     putParcelable(ARG_PARAM1, book)
@@ -57,8 +56,7 @@ class BookDetailsFragment : Fragment() {
         checkoutInfo = rootView.findViewById(R.id.checkoutTextView)
         val checkoutButton: Button = rootView.findViewById(R.id.checkoutButton)
         val deleteButton: Button = rootView.findViewById(R.id.deleteButton)
-        val book = arguments?.getParcelable<Book>(ARG_PARAM1)
-        val id = book!!.id
+        var book = arguments?.getParcelable<Book>(ARG_PARAM1)
 
         setViews(book)
 
@@ -71,7 +69,7 @@ class BookDetailsFragment : Fragment() {
         return rootView
     }
 
-    fun setViews(book: Book?){
+    private fun setViews(book: Book?){
         bookTitle.text = book?.title
         author.text = book?.author
         publisher.text = book?.publisher
@@ -80,7 +78,7 @@ class BookDetailsFragment : Fragment() {
        //TODO: Put Checkout data here with concatenated data (time stamp + name)
     }
 
-    fun chekoutListener(book: Book){
+    fun chekoutListener(book: Book?){
         //Inflate the dialog with custom view
         val mDialogView = LayoutInflater.from(activity).inflate(R.layout.checkout_dialog, null)
         //AlertDialogBuilder
@@ -92,14 +90,13 @@ class BookDetailsFragment : Fragment() {
 
         mDialogView.dialogDeleteBtn.setOnClickListener {
             //dismiss dialog
-            mainCall.checkout(book.id!!){
+            mainCall.checkout(book?.id!!){
                 fragmentManager?.inTransaction {
                     replace(R.id.fragment_container, bookListFragment )
                 }
             }
             mAlertDialog.dismiss()
-            //get text from EditTexts
-            val name = mDialogView.dialogDeleteTextView.text.toString()
+//            val name = mDialogView.dialogDeleteTextView.text.toString()
         }
         //cancel button click of custom layout
         mDialogView.deleteCancelBtn.setOnClickListener {
@@ -108,7 +105,7 @@ class BookDetailsFragment : Fragment() {
         }
     }
 
-    fun deleteBookListener(book: Book){
+    fun deleteBookListener(book: Book?){
 //Inflate the dialog with custom view
         val mDialogView = LayoutInflater.from(activity).inflate(R.layout.deletebook_dialog, null)
         //AlertDialogBuilder
@@ -117,12 +114,11 @@ class BookDetailsFragment : Fragment() {
         //show dialog
         val  mAlertDialog = mBuilder.show()
         //login button click of custom layout
-        mDialogView.dialogDeleteBtn.setOnClickListener { view: View ->
-            //TODO: Make API call to delete book
+        mDialogView.dialogDeleteBtn.setOnClickListener {
             //dismiss dialog
             mAlertDialog.dismiss()
             //get text from EditTexts of custom layout
-            mainCall.delete(book.id!!) {
+            mainCall.delete(book?.id!!) {
                 fragmentManager?.inTransaction {
                     replace(R.id.fragment_container, bookListFragment )
                 }

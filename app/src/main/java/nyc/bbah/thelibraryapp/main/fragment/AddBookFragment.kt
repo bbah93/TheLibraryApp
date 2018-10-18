@@ -46,10 +46,10 @@ class AddBookFragment : Fragment() {
         // Inflate the layout for this fragment
         val rootView: View = inflater.inflate(R.layout.fragment_add_book, container, false)
 
-        bookTitle = rootView.findViewById(R.id.bookTitle_editText) as EditText
-        bookAuthor = rootView.findViewById(R.id.author_editText) as EditText
-        bookPublisher = rootView.findViewById(R.id.publisher_editText) as EditText
-        bookCategories = rootView.findViewById(R.id.categories_editText) as EditText
+        bookTitle = rootView.findViewById(R.id.bookTitle_editText)
+        bookAuthor = rootView.findViewById(R.id.author_editText)
+        bookPublisher = rootView.findViewById(R.id.publisher_editText)
+        bookCategories = rootView.findViewById(R.id.categories_editText)
         val submitButton: Button = rootView.findViewById(R.id.submitButton)
         val date = getCurrentDateTime()
         val dateInString = date.toString("yyyy/MM/dd HH:mm:ss")
@@ -59,12 +59,12 @@ class AddBookFragment : Fragment() {
 
         submitButton.setOnClickListener {
             //check for empty editText fields
-            if (bookTitle.text == null && bookAuthor.text == null && bookPublisher.text == null && bookCategories.text == null) {
+            if (bookTitle.text.toString().isEmpty() || bookAuthor.text.toString().isEmpty() || bookPublisher.text.toString().isEmpty() || bookCategories.text.toString().isEmpty()) {
                 Toast.makeText(requireActivity(), "Please Complete Book Form", Toast.LENGTH_LONG).show()
             } else {
                 val mainCall: MainCall = MainCall(BooksService.ApiUtils.books_Service)
-                val book = Book(bookAuthor.toString(), bookTitle.toString(),
-                        bookCategories.toString(), bookPublisher.toString(), BASE_URL, 33, dateInString, "")
+                val book = Book(bookAuthor.text.toString(), bookTitle.text.toString(),
+                        bookCategories.text.toString(), bookPublisher.text.toString(), BASE_URL, 33, dateInString, "")
                 mainCall.addBook(book) {
                     fragmentManager?.inTransaction {
                         replace(R.id.fragment_container, bookListFragment )
